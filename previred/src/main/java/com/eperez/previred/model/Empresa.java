@@ -22,6 +22,7 @@ import lombok.Setter;
 
 public class Empresa {
 
+    /* Representación de la tabla Empresas en Objeto */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_empresa")

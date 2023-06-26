@@ -21,6 +21,7 @@ import lombok.Setter;
 
 public class Trabajador {
 
+    /* Representación de la tabla Trabajadores en Objeto */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_trabajador")

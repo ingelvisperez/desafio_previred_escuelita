@@ -12,10 +12,24 @@ import com.eperez.previred.repository.EmpresaRepository;
 @Service
 
 public class EmpresaService {
-    
+
+    /* 
+        Necesitamos conectar esta clase con la clase repositorio
+        (Lo hacemos declarando una variable de tipo EmpresaRepository)        
+        Asi ésta clase podrá utilizar 
+        los métodos CRUD definidos en la interfaz EmpresaRepository 
+        para interactuar con la base.
+    */   
     @Autowired
     private EmpresaRepository empresaRepository;
 
+    /* Se crea el constructor de esta clase, que tiene como parámetro
+     * un objeto de tipo EmpresaRepository.
+     * 
+     * Esto quiere decir que la instancia EmpresaService que se crea
+     * tendrá acceso a un objeto de EmpresaRepository y así poder 
+     * interactuar con la base de datos
+     */
     public EmpresaService(EmpresaRepository empresaRepository) {
         this.empresaRepository = empresaRepository;
     }

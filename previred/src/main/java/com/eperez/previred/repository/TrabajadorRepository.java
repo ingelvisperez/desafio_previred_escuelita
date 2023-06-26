@@ -8,7 +8,6 @@ import com.eperez.previred.model.Trabajador;
 @Repository
 
 public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer> {
-    
-    // @Query(value = "", nativeQuery = true)
+    /* Interfaz es la colección de métodos que se utilizarán */
 
 }

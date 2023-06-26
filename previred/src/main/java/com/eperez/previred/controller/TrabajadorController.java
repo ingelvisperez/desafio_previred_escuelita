@@ -17,6 +17,17 @@ import com.eperez.previred.model.DtoTrabajador;
 import com.eperez.previred.model.Trabajador;
 import com.eperez.previred.service.TrabajadorService;
 
+
+/*  @Controller:
+    Es una anotación utilizada para marcar una clase que se encargará 
+    de manejar solicitudes HTTP y enviar respuestas en forma de objetos
+    Java serializados en formato JSON o XML. Sirve para especificar que 
+    es una clase de tipo controlador
+*/
+/*  @CrossOrigin("*"):
+    Sirve para especificar el origen de las peticiones, en este caso pueden
+    venir de cualquier lado.
+*/
 @Controller
 @CrossOrigin("*")
 @RestController

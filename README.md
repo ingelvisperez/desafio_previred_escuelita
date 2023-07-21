@@ -39,7 +39,9 @@ El programa ha sido desarrollado utilizando las siguientes tecnologías:
 
 - Spring Boot: Framework de desarrollo de aplicaciones Java para la creación de servicios RESTful.
 - Spring Data JPA: Biblioteca de persistencia que facilita el acceso a bases de datos relacionales.
+- Springdoc: La librería Springdoc permite generar de forma automática la especificación de la API que implementa el código publicándose en un endpoint, esta librería también genera la documentación de Swagger de la API en otro endpoint (esta es nuestra ruta http://localhost:8085/doc/swagger-ui.html) y permite probar la API directamente desde la documentación.
 - Lombok: Es una biblioteca para Java que nos evita tener que escribir ciertos métodos, que van a ser repetitivos y que realmente tampoco aportan lógica al negocio. En nuestro caso la creación de los métodos Set y Get de las clases Empresa.java y Trabajador.java
+
 
 ## Instrucciones para compilar e instalar en tu computador
 
@@ -57,9 +59,9 @@ Si no está instalado Java puedes ir al sitio oficial de Oracle o en mi caso que
 
 6. Busca la clase principal del proyecto llamada `Application` y ejecútala haciendo clic en un ícono triangular parecido al de "Play".
 
-7. La aplicación se ejecutará  y se levantará en la siguiente URL por defecto: `http://localhost:8080`. Puedes acceder a ella utilizando tu navegador web.
+7. La aplicación se ejecutará  y se levantará en la siguiente URL: `http://localhost:8085/doc/swagger-ui.html`. Puedes acceder a ella utilizando tu navegador web.
 
-8. Ahora deberías tener la aplicación API RESTful ejecutándose en tu entorno local. Puedes probar los diferentes endpoints utilizando Postman.
+8. Ahora deberías tener la aplicación API RESTful ejecutándose en tu entorno local. Puedes probar los diferentes endpoints utilizando Postman o Swagger.
 
 ## Uso
 Una vez que la aplicación esté en funcionamiento, podrás interactuar con los endpoints proporcionados mediante las peticiones HTTP correspondientes.

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.eperez.previred.model.DtoTrabajador;
@@ -31,6 +32,7 @@ import com.eperez.previred.service.TrabajadorService;
 @Controller
 @CrossOrigin("*")
 @RestController
+@RequestMapping("/trabajador")
 
 public class TrabajadorController {
 
@@ -46,25 +48,25 @@ public class TrabajadorController {
     /* --------------------------------- */
 
     // POST: Método para ingresar/registrar a la BD
-    @PostMapping("/trabajador/register")
+    @PostMapping("/register")
     public void registerTrabajador(@RequestBody DtoTrabajador dtoTrabajador){
         trabajadorService.registerTrabajador(dtoTrabajador);
     }
 
     // PUT: Método para editar  en la BD
-    @PutMapping("/trabajador/update")
+    @PutMapping("/update")
     public void updateTrabajador(@RequestBody Trabajador trabajador){
         trabajadorService.updateTrabajador(trabajador);
     }
 
     // DELETE: Método para Eliminar/Borrar 
-    @DeleteMapping("/trabajador/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteEmpresa(@PathVariable Integer id){
         trabajadorService.deleteTrabajador(id);
     }
 
     // GET: Método que retorna todos 
-    @GetMapping("/trabajador/findAll")
+    @GetMapping("/findAll")
     public List<Trabajador> getTrabajador() {
         return trabajadorService.findAllTrabajador();
     }       

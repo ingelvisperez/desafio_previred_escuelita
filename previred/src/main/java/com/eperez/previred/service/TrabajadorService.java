@@ -1,6 +1,7 @@
 package com.eperez.previred.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,7 @@ public class TrabajadorService {
     /* --------------------------------- */
 
     // Método para Registrar a un trabajador
-    public Trabajador registerTrabajador(DtoTrabajador dtoTrabajador){
+    public Trabajador registroTrabajador(DtoTrabajador dtoTrabajador){
         
         Trabajador trabajadorActual = new Trabajador();
 
@@ -53,17 +54,25 @@ public class TrabajadorService {
     }
 
     // Método ACTUALIZAR/EDITAR/UPDATE
-    public void updateTrabajador(Trabajador trabajador){
-        this.trabajadorRepository.save(trabajador);
+    public Trabajador actualizarTrabajador(Trabajador trabajador){
+        return trabajadorRepository.save(trabajador);
     }
 
     // Método para BORRAR/DELETE
-    public void deleteTrabajador(Integer id){
+    public void eliminarTrabajador(Integer id){
         trabajadorRepository.deleteById(id);
     }
 
     //Método para BUSCAR/ENCONTRAR a TODOS
-    public List<Trabajador> findAllTrabajador(){
+    public List<Trabajador> buscarTrabajadores(){
         return trabajadorRepository.findAll();
-    }       
+    }
+    
+    // Método para buscar por id
+    public Optional<Trabajador> buscarTrabajadorPorId(Integer id){
+        return trabajadorRepository.findById(id);
+    }
+
+
+
 }

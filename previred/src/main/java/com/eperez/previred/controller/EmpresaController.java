@@ -1,8 +1,11 @@
 package com.eperez.previred.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,28 +50,65 @@ public class EmpresaController {
     /* --------------------------------- */
 
     // POST: Método para ingresar/registrar a la BD
+    // @PostMapping("/register")
+    // public void registroEmpresa(@RequestBody DtoEmpresa dtoEmpresa){
+    //     empresaService.registroEmpresa(dtoEmpresa);
+    // }
     @PostMapping("/register")
-    public void registerEmpresa(@RequestBody DtoEmpresa dtoEmpresa){
-        empresaService.registerEmpresa(dtoEmpresa);
+    public ResponseEntity<?> registroEmpresa(@RequestBody DtoEmpresa dtoEmpresa){
+        Empresa empresaBD = empresaService.registroEmpresa(dtoEmpresa);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(empresaBD);
     }
 
     // PUT: Método para editar  en la BD
-    @PutMapping("/update")
-    public void updateEmpresa(@RequestBody Empresa empresa){
-        empresaService.updateEmpresa(empresa);
+    // @PutMapping("/update")
+    // public void actualizarEmpresa(@RequestBody Empresa empresa){
+    //     empresaService.actualizarEmpresa(empresa);
+    // }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> actualizarEmpresa(@RequestBody Empresa empresa, @PathVariable Integer id){
+        
+        Optional<Empresa> empresaOpcional = empresaService.buscarEmpresaPorId(id);
+        if(empresaOpcional.isPresent()){
+            return ResponseEntity.status(HttpStatus.CREATED).body(empresaService.actualizarEmpresa(empresa));
+        }
+        return ResponseEntity.notFound().build();
     }
 
     // DELETE: Método para Eliminar/Borrar 
+    // @DeleteMapping("/delete/{id}")
+    // public void borrarEmpresa(@PathVariable Integer id){
+    //     empresaService.borrarEmpresa(id);
+    // }
     @DeleteMapping("/delete/{id}")
-    public void deleteEmpresa(@PathVariable Integer id){
-        empresaService.deleteEmpresa(id);
+    public ResponseEntity<?> borrarEmpresa(@PathVariable Integer id){
+        Optional<Empresa> empresaOpcional = empresaService.buscarEmpresaPorId(id);
+        if(empresaOpcional.isPresent()){
+            empresaService.borrarEmpresa(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
     // GET: Método que retorna todos 
+    // @GetMapping("/findAll")
+    // public List<Empresa> buscarEmpresas() {
+    //     return empresaService.buscarEmpresas();
+    // }  
     @GetMapping("/findAll")
-    public List<Empresa> getEmpresa() {
-        return empresaService.findAllEmpresa();
-    }    
+    public ResponseEntity<List<Empresa>> buscarEmpresas() {
+        return ResponseEntity.ok(empresaService.buscarEmpresas());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarEmpresaPorId(@PathVariable Integer id){
+        Optional<Empresa> empresaOpcional = empresaService.buscarEmpresaPorId(id);
+        if (empresaOpcional.isPresent()) {
+            return ResponseEntity.ok(empresaOpcional.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
 
     
 

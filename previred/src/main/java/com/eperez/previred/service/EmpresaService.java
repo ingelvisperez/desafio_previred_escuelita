@@ -1,6 +1,7 @@
 package com.eperez.previred.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class EmpresaService {
     /* --------------------------------- */
 
     // Método para Registrar una Empresa
-    public Empresa registerEmpresa(DtoEmpresa dtoEmpresa){
+    public Empresa registroEmpresa(DtoEmpresa dtoEmpresa){
         Empresa empresaActual = new Empresa();
 
         empresaActual.setRutEmpresa(dtoEmpresa.getRutEmpresa());
@@ -50,19 +51,24 @@ public class EmpresaService {
     }
 
     // Método ACTUALIZAR/EDITAR/UPDATE
-    public void updateEmpresa(Empresa empresa){
-        this.empresaRepository.save(empresa);
+    public Empresa actualizarEmpresa(Empresa empresa){
+        return empresaRepository.save(empresa);
     }
 
     // Método para BORRAR/DELETE
-    public void deleteEmpresa(Integer id){
+    public void borrarEmpresa(Integer id){
         empresaRepository.deleteById(id);
     }
 
     //Método para BUSCAR/ENCONTRAR a TODOS
-    public List<Empresa> findAllEmpresa(){
+    public List<Empresa> buscarEmpresas(){
         return empresaRepository.findAll();
     }   
+
+    // Método para buscar una empresa por Id
+    public Optional<Empresa> buscarEmpresaPorId(Integer id){
+        return empresaRepository.findById(id);
+    }
     
 
 

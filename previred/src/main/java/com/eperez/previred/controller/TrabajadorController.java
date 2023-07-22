@@ -74,7 +74,7 @@ public class TrabajadorController {
         if (trabajadorOpcional.isPresent()) {
             return ResponseEntity.status(HttpStatus.CREATED).body(trabajadorService.actualizarTrabajador(trabajador));
         }
-        
+
         return ResponseEntity.notFound().build();
     }    
 
@@ -90,9 +90,8 @@ public class TrabajadorController {
             trabajadorService.eliminarTrabajador(id);
             return ResponseEntity.noContent().build();            
         }
-
-        return ResponseEntity.notFound().build();
         
+        return ResponseEntity.notFound().build();
     }
 
     // GET: Método que retorna a todos los trabajadores 

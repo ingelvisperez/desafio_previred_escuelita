@@ -73,6 +73,8 @@ public class TrabajadorService {
         return trabajadorRepository.findById(id);
     }
 
-
+    public Optional<Trabajador> porRut(String rut){
+        return trabajadorRepository.findByRutTrabajador(rut);
+    }
 
 }

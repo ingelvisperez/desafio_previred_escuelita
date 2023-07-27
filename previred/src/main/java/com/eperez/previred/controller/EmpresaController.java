@@ -1,5 +1,6 @@
 package com.eperez.previred.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.eperez.previred.model.DtoEmpresa;
 import com.eperez.previred.model.Empresa;
 import com.eperez.previred.service.EmpresaService;
+
+import jakarta.validation.Valid;
 
 /*  @Controller:
     Es una anotación utilizada para marcar una clase que se encargará 
@@ -55,9 +59,12 @@ public class EmpresaController {
     //     empresaService.registroEmpresa(dtoEmpresa);
     // }
     @PostMapping("/register")
-    public ResponseEntity<?> registroEmpresa(@RequestBody DtoEmpresa dtoEmpresa){
+    public ResponseEntity<?> registroEmpresa(@Valid @RequestBody DtoEmpresa dtoEmpresa, BindingResult result){
+        
+        if (result.hasErrors()) {
+            return validarErrores(result);
+        } 
         Empresa empresaBD = empresaService.registroEmpresa(dtoEmpresa);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(empresaBD);
     }
 
@@ -67,7 +74,11 @@ public class EmpresaController {
     //     empresaService.actualizarEmpresa(empresa);
     // }
     @PutMapping("/update/{id}")
-    public ResponseEntity<?> actualizarEmpresa(@RequestBody Empresa empresa, @PathVariable Integer id){
+    public ResponseEntity<?> actualizarEmpresa(@Valid @RequestBody Empresa empresa, BindingResult result, @PathVariable Integer id){
+        
+        if (result.hasErrors()) {
+            return validarErrores(result);
+        } 
         
         Optional<Empresa> empresaOpcional = empresaService.buscarEmpresaPorId(id);
         if(empresaOpcional.isPresent()){
@@ -110,6 +121,14 @@ public class EmpresaController {
         return ResponseEntity.notFound().build();
     }
 
-    
+   // Método para validar errores al editar o registrar
+    private ResponseEntity<?> validarErrores(BindingResult result) {
+        HashMap<String,String> erroresMap = new HashMap<>();
+        System.out.println("estoy en validaacion");
+        result.getFieldErrors().forEach(err -> {
+            erroresMap.put(err.getField(), "El campo " + err.getField() + " " + err.getDefaultMessage());
+        });
+        return ResponseEntity.badRequest().body(erroresMap);
+    }    
 
 }

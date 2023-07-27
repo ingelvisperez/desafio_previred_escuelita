@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,12 +29,15 @@ public class Empresa {
     @Column(name = "id_empresa")
     private Integer idEmpresa;
 
-    @Column(name = "rut_empresa")
+    @NotEmpty(message = "Campo de RUT vacío")
+    @Column(name = "rut_empresa", unique = true)
     private String rutEmpresa;
 
+    @NotEmpty(message = "Campo de razón social vacío")
     @Column(name = "razon_social")
     private String razonSocial;
 
+    @NotEmpty(message = "Campo de fecha vacío")
     @Column(name = "fecha_registro")
     private LocalDateTime fechaRegistro;
 

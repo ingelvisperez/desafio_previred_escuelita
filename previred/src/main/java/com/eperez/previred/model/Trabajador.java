@@ -6,6 +6,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,22 +30,29 @@ public class Trabajador {
     @Column(name = "id_trabajador")
     private Integer idTrabajador;
 
+    // NotEmpty es para String, NotNull para Long, Integer, Date, etc.
+    @NotBlank
     @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "apellido_paterno")
+    @NotBlank
+    @Column
     private String apellidoPaterno;
 
+    @NotBlank
     @Column(name = "apellido_materno")
     private String apellidoMaterno;
 
+    @NotBlank
     @Column(name = "direccion")
     private String direccion;
 
+    @NotNull
     @Column(name = "fk_id_empresa") 
     private Integer fkIdEmpresa;
 
-    @Column(name = "rut_trabajador")
+    @NotBlank
+    @Column(name = "rut_trabajador", unique = true)
     private String rutTrabajador;
 
 }
